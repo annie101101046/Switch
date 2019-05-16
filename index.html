@@ -36,16 +36,45 @@
     <script type="text/babel">
 
         class Switch extends React.Component{
+        // 處理狀態 
+        //component 的建構式中先初始化狀態
+            constructor(props){
+                super(props);
+                this.state={on:false};
+            }
+
+        // 畫好 switch 圖跟 button
             render(){
-                return <div className="switch">
+                //根據狀態調整畫面
+                let className="switch";
+                if(this.state.on){
+                    className+=" switch-on";
+                }
+                //classname 動態套用
+                //事件處理
+                return <div onClick={this.update.bind(this)} className={className}>
                     <div className="btn"></div>
                 </div>;
+            }
+            //事件處理狀態更新
+            update(){
+                this.setState((currentState)=>({on:!currentState.on}));
             }
         }
 
         window.addEventListener("load",()=>{
-            ReactDOM.render(<Switch/>, document.body);
+            ReactDOM.render(<Switch/>, document.getElementById("switch-0"));
+            ReactDOM.render(<Switch/>, document.getElementById("switch-1"));
+
         });
 </script>
+</head>
+
+<body>
+    <div id="switch-0"></div>
+    <hr />
+    <div id="switch-1"></div>
+
+</body>
 
 </html>
